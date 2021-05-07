@@ -99,7 +99,7 @@ ssim = SSIM()
 ssim.eval()
 
 # Start distributed data parallel, as it's faster than DataParallel
-if torch.cuda.device_count() > 1:
+if torch.cuda.device_count() > 0:  # GBH set to > 0
     print("Let's use", torch.cuda.device_count(), "GPUs!")
     os.environ['MASTER_ADDR'] = 'localhost'
     os.environ['MASTER_PORT'] = '1234'+str(argsTest.GPUs[0])
