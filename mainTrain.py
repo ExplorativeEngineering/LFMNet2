@@ -199,6 +199,7 @@ if __name__ == '__main__':
     for epoch in range(epochStart, args.epochs):
         net.train()
         torch.set_grad_enabled(True)
+        torch.cuda.empty_cache()
         train_loss = 0
         print('Training')
         global_it_counter = 0
