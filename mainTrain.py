@@ -96,7 +96,10 @@ device = torch.device("cuda:"+str(device_ids[0]) if torch.cuda.is_available() el
 # Create unique label
 today = datetime.now()
 # Get commit number 
-label = subprocess.check_output(["git", "describe", "--always"]).strip()
+# label = subprocess.check_output(["git", "describe", "--always"]).strip()
+#specific to MBL lab workstation
+label = subprocess.check_output(["C:/Program Files/git/bin/git", "describe", "--always"]).strip()
+
 comment = today.strftime('%Y_%m_%d__%H:%M:%S') + "_"+ str(args.useBias) +"B_"+str(args.biasVal)+"bias_" + str(nImgs) + \
      "I_"+ str(args.batchSize)+"BS_"+str(args.useSkipCon)+"Sk_" +  str(args.fovInput) + "FOV_" + str(args.neighShape) + "nT_" \
             + str(args.ths) + "ths_" + str(label.decode("utf-8") ) + "_commit__" + args.outputPrefix
