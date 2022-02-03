@@ -1,0 +1,1 @@
+python mainEval.py --imagesToUse 6 --GPUs 0 --datasetPath "C:/Users/LabOldenbourg/Desktop/BrainImagesJosuePage/brainSubset/brainSubset_1_1.h5" --outputPath "eval/" --checkpointPath "2022_02_03__154557_TrueB_0.1bias_6I_16BS_FalseSk_9FOV_3nT_0.03ths_a2a81e9_commit__" --checkpointFileName "model_49" --writeVolsToH5 True --writeToTB True

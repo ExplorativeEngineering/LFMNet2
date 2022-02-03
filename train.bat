@@ -1,0 +1,1 @@
+python mainTrain.py --epochs 50 --valEvery 0.25 --imagesToUse 0 1 2 3 4 5 --batchSize 16 --validationSplit 0.1 --biasVal 0.1 --learningRate 0.005 --useBias True --useSkipCon False --fovInput 9 --neighShape 3 --useShallowUnet True --ths 0.03 -–datasetPath "C:/Users/LabOldenbourg/Desktop/BrainImagesJosuePage/brainSubset/brainSubset_1_1.h5" --outputPath "runs/" --outputPrefix ""
