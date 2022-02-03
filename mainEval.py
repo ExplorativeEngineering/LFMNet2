@@ -105,9 +105,8 @@ if __name__ == '__main__':
         os.environ['MASTER_ADDR'] = 'localhost'
         os.environ['MASTER_PORT'] = '1234'+str(argsTest.GPUs[0])
         torch.distributed.init_process_group(backend="nccl", rank=0, world_size=1) #initialize torch.distributed 
-
-    # Move network to distributed data parallel
-    net = nn.parallel.DistributedDataParallel(net, device_ids=argsTest.GPUs, output_device=argsTest.GPUs[0]).to(device)
+        # Move network to distributed data parallel
+        net = nn.parallel.DistributedDataParallel(net, device_ids=argsTest.GPUs, output_device=argsTest.GPUs[0]).to(device)
     # Load network from checkpoint
     net.load_state_dict(checkpoint['model_state_dict'])
 
