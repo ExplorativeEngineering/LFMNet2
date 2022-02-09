@@ -111,8 +111,10 @@ if __name__ == '__main__':
     net.load_state_dict(checkpoint['model_state_dict'])
 
     # Move net to single GPU
-    net = net.module.to("cuda:1")
-    device = "cuda:1"
+    # net = net.module.to("cuda:1")
+    # device = "cuda:1"
+    net = net.module.to("cuda:0")
+    device = "cuda:0"  #zero for single gpu
     # timers
     start = torch.cuda.Event(enable_timing=True)
     end = torch.cuda.Event(enable_timing=True)
