@@ -70,8 +70,9 @@ if __name__ == '__main__':
         torch.set_num_threads(num_workers)
 
     if not torch.cuda.is_available():
-            print("GPU initialization error")
-            exit(-1)
+        print("GPU initialization error")
+        exit(-1)
+        
     if torch.cuda.is_available():
         print ("Cuda is available")
         device_id = torch.cuda.current_device()
