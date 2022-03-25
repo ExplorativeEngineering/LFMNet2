@@ -1,0 +1,10 @@
+Rebuild Environment
+conda create -n lfmnet python=3.7.4 
+conda activate lfmnet
+conda install pytorch=1.4.0 torchvision cpuonly -c pytorch
+conda install h5py==2.9.0
+conda install matplotlib==3.1.1
+conda install tables==3.6.1
+conda install -nightly==2.2.0a20200212
+conda install torch==1.4.0
+conda install torchvision==0.2.1
