@@ -1,67 +1,67 @@
-if __name__ == '__main__': 
-    import torch
-    import torch.nn as nn
-    import torch.nn.functional as F
-    from torch.utils.tensorboard import SummaryWriter
-    from torch.utils import data
-    from torch import optim
-    import torchvision.models as models
-    from torch.autograd import Variable
-    import torchvision as tv
-    import random
-    import math
-    import time
-    from datetime import datetime
-    import os
-    import argparse
-    import subprocess
-    from util.LFUtil import *
-    import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.tensorboard import SummaryWriter
+from torch.utils import data
+from torch import optim
+import torchvision.models as models
+from torch.autograd import Variable
+import torchvision as tv
+import random
+import math
+import time
+from datetime import datetime
+import os
+import argparse
+import subprocess
+from util.LFUtil import *
+import numpy as np
 
-    from networks.LFMNet import LFMNet
+from networks.LFMNet import LFMNet
 
-    # Arguments
-    parser = argparse.ArgumentParser()
-    # Number of epochs
-    parser.add_argument('--epochs', type=int, default=1000)
-    # Validate every n percentage of the data
-    parser.add_argument('--valEvery', type=float, default=0.25)
-    # Image indices to use for training and validation
-    parser.add_argument('--imagesToUse', nargs='+', type=int, default=list(range(0,5,1)))
-    # List of GPUs to use: 0 1 2 for example
-    parser.add_argument('--GPUs', nargs='+', type=int, default=None)
-    # Batch size
-    parser.add_argument('--batchSize', type=int, default=128)
-    # Perentage of the data to use for validation, from 0 to 1
-    parser.add_argument('--validationSplit', type=float, default=0.1)
-    # Bias initialization value
-    parser.add_argument('--biasVal', type=float, default=0.1)
-    # Learning rate
-    parser.add_argument('--learningRate', type=float, default=0.001)
-    # Use bias flag
-    parser.add_argument('--useBias', type=str2bool, default=True)
-    # Use skip connections flag
-    parser.add_argument('--useSkipCon', type=str2bool, default=False)
-    # User selected random seed
-    parser.add_argument('--randomSeed', type=int, default=None) 
-    # fov of input or neighboarhood around lenslet to reconstruct
-    parser.add_argument('--fovInput', type=int, default=9)
-    # nT number of lenslets to reconstruct simultaneously use at training time
-    parser.add_argument('--neighShape', type=int, default=3)
-    # Flag to use shallow or large U-net
-    parser.add_argument('--useShallowUnet', type=str2bool, default=True)
-    # Lower threshold of GT stacks, to get rid of autofluorescence
-    parser.add_argument('--ths', type=float, default=0.03)
-    # Path to dataset
-    parser.add_argument('--datasetPath', nargs='?', default="BrainLFMConfocalDataset/Brain_40x_64Depths_362imgs.h5")
-    # Path to directory where models and tensorboard logs are stored
-    parser.add_argument('--outputPath', nargs='?', default="runs/")
-    # Prefix for current output folder
-    parser.add_argument('--outputPrefix', nargs='?', default="")
-    # Path to model in case of continuing a training
-    parser.add_argument('--checkpointPath', nargs='?', default=None)
+def main(args=None):
+    # # Arguments
+    # parser = argparse.ArgumentParser()
+    # # Number of epochs
+    # parser.add_argument('--epochs', type=int, default=1000)
+    # # Validate every n percentage of the data
+    # parser.add_argument('--valEvery', type=float, default=0.25)
+    # # Image indices to use for training and validation
+    # parser.add_argument('--imagesToUse', nargs='+', type=int, default=list(range(0,5,1)))
+    # # List of GPUs to use: 0 1 2 for example
+    # parser.add_argument('--GPUs', nargs='+', type=int, default=None)
+    # # Batch size
+    # parser.add_argument('--batchSize', type=int, default=128)
+    # # Perentage of the data to use for validation, from 0 to 1
+    # parser.add_argument('--validationSplit', type=float, default=0.1)
+    # # Bias initialization value
+    # parser.add_argument('--biasVal', type=float, default=0.1)
+    # # Learning rate
+    # parser.add_argument('--learningRate', type=float, default=0.001)
+    # # Use bias flag
+    # parser.add_argument('--useBias', type=str2bool, default=True)
+    # # Use skip connections flag
+    # parser.add_argument('--useSkipCon', type=str2bool, default=False)
+    # # User selected random seed
+    # parser.add_argument('--randomSeed', type=int, default=None) 
+    # # fov of input or neighboarhood around lenslet to reconstruct
+    # parser.add_argument('--fovInput', type=int, default=9)
+    # # nT number of lenslets to reconstruct simultaneously use at training time
+    # parser.add_argument('--neighShape', type=int, default=3)
+    # # Flag to use shallow or large U-net
+    # parser.add_argument('--useShallowUnet', type=str2bool, default=True)
+    # # Lower threshold of GT stacks, to get rid of autofluorescence
+    # parser.add_argument('--ths', type=float, default=0.03)
+    # # Path to dataset
+    # parser.add_argument('--datasetPath', nargs='?', default="BrainLFMConfocalDataset/Brain_40x_64Depths_362imgs.h5")
+    # # Path to directory where models and tensorboard logs are stored
+    # parser.add_argument('--outputPath', nargs='?', default="runs/")
+    # # Prefix for current output folder
+    # parser.add_argument('--outputPrefix', nargs='?', default="")
+    # # Path to model in case of continuing a training
+    # parser.add_argument('--checkpointPath', nargs='?', default=None)
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
     nImgs = len(args.imagesToUse)
 
     # Setup multithreading
@@ -345,3 +345,5 @@ if __name__ == '__main__':
                 f"Train loss: {train_loss / len(train_dataset):.7f}.. "
                 f"Test loss: {test_loss / len(test_dataset):.7f}.. ")
 
+if __name__ == '__main__':
+    main()

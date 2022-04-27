@@ -1,48 +1,50 @@
-if __name__ == '__main__': 
-    import torch
-    import torch.nn as nn
-    import torch.nn.functional as F
-    from torch.utils.tensorboard import SummaryWriter
-    from torch.utils import data
-    from torch import optim
-    import torchvision.models as models
-    from torch.autograd import Variable
-    import torchvision as tv
-    import random
-    import math
-    import time
-    from datetime import datetime
-    import os
-    import argparse
-    import subprocess
-    from util.LFUtil import *
-    import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.utils.tensorboard import SummaryWriter
+from torch.utils import data
+from torch import optim
+import torchvision.models as models
+from torch.autograd import Variable
+import torchvision as tv
+import random
+import math
+import time
+from datetime import datetime
+import os
+import argparse
+import subprocess
+from util.LFUtil import *
+import numpy as np
 
-    from networks.LFMNet import LFMNet
+from networks.LFMNet import LFMNet
+
+def main(argsTest=None):
 
     torch.backends.cudnn.deterministic = False
     torch.backends.cudnn.benchmark = True
 
-    # Arguments
-    parser = argparse.ArgumentParser()
-    # Image indices to use for training and validation
-    parser.add_argument('--imagesToUse', nargs='+', type=int, default=list(range(0,15,1)))
-    # GPUs to use
-    parser.add_argument('--GPUs', nargs='+', type=int, default=[0])
-    # Path to dataset
-    parser.add_argument('--datasetPath', nargs='?', default="BrainLFMConfocalDataset/Brain_40x_64Depths_362imgs.h5")
-    # Path to directory where models and tensorboard logs are stored
-    parser.add_argument('--outputPath', nargs='?', default="eval/runsMouse/")
-    # Path to model to use for testing
-    parser.add_argument('--checkpointPath', nargs='?', default="runs/2020_10_11__14:23:21_TrueB_0.1bias_5I_128BS_FalseSk_9FOV_3nT_0.03ths_a8d9a2c_commit_")
-    # File to use
-    parser.add_argument('--checkpointFileName', nargs='?', default="model_130")
-    # Write volumes to H5 file
-    parser.add_argument('--writeVolsToH5', type=str2bool, default=False)
-    # Write output to tensorboard
-    parser.add_argument('--writeToTB', type=str2bool, default=True)
+    # # Arguments
+    # parser = argparse.ArgumentParser()
+    # # Image indices to use for training and validation
+    # parser.add_argument('--imagesToUse', nargs='+', type=int, default=list(range(0,15,1)))
+    # # GPUs to use
+    # parser.add_argument('--GPUs', nargs='+', type=int, default=[0])
+    # # Path to dataset
+    # parser.add_argument('--datasetPath', nargs='?', default="BrainLFMConfocalDataset/Brain_40x_64Depths_362imgs.h5")
+    # # Path to directory where models and tensorboard logs are stored
+    # parser.add_argument('--outputPath', nargs='?', default="eval/runsMouse/")
+    # # Path to model to use for testing
+    # parser.add_argument('--checkpointPath', nargs='?', default="runs/2020_10_11__14:23:21_TrueB_0.1bias_5I_128BS_FalseSk_9FOV_3nT_0.03ths_a8d9a2c_commit_")
+    # # File to use
+    # parser.add_argument('--checkpointFileName', nargs='?', default="model_130")
+    # # Write volumes to H5 file
+    # parser.add_argument('--writeVolsToH5', type=str2bool, default=False)
+    # # Write output to tensorboard
+    # parser.add_argument('--writeToTB', type=str2bool, default=True)
 
-    argsTest = parser.parse_args()
+
+    # argsTest = parser.parse_args()
     nImgs = len(argsTest.imagesToUse)
 
     # Setup multithreading
@@ -113,8 +115,8 @@ if __name__ == '__main__':
     # Move net to single GPU
     # net = net.module.to("cuda:1")
     # device = "cuda:1"
-    net = net.module.to("cuda:0")
-    device = "cuda:0"  #zero for single gpu
+    net = net.to("cpu")
+    device = "cpu"  #zero for single gpu
     # timers
     start = torch.cuda.Event(enable_timing=True)
     end = torch.cuda.Event(enable_timing=True)
@@ -187,3 +189,5 @@ if __name__ == '__main__':
     writer.close()
         
 
+if __name__ == '__main__':
+    main()

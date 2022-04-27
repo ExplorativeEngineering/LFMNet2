@@ -4,8 +4,10 @@ import torch
 
 x = torch.rand(5, 3)
 print(x)
+print(torch.cuda.device_count())
 
-if not torch.cuda.is_available():
+
+if torch.cuda.is_available():
    print ("Cuda is available")
    device_id = torch.cuda.current_device()
    gpu_properties = torch.cuda.get_device_properties(device_id)
@@ -20,8 +22,8 @@ if not torch.cuda.is_available():
 else:    
    print ("Cuda is not available")
 # from mainEval
-    # Select GPUs to use
-    argsTest.GPUs = list(range(torch.cuda.device_count())) if argsTest.GPUs is None else argsTest.GPUs
-    print('Using GPUs: ' + str(argsTest.GPUs))
-    # set Device to use
-    device = torch.device("cuda:"+str(argsTest.GPUs[0]) if torch.cuda.is_available() else "cpu")
+   #  # Select GPUs to use
+   #  argsTest.GPUs = list(range(torch.cuda.device_count())) if argsTest.GPUs is None else argsTest.GPUs
+   #  print('Using GPUs: ' + str(argsTest.GPUs))
+   #  # set Device to use
+   #  device = torch.device("cuda:"+str(argsTest.GPUs[0]) if torch.cuda.is_available() else "cpu")
