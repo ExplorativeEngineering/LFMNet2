@@ -57,6 +57,7 @@ def main(argsTest=None):
     # Select GPUs to use 
     argsTest.GPUs = list(range(torch.cuda.device_count())) if argsTest.GPUs is None else argsTest.GPUs
     print('Using GPUs: ' + str(argsTest.GPUs))
+    device_ids = argsTest.GPUs
 
     # Load checkpoint if provided
     if argsTest.checkpointPath is not None:
@@ -113,10 +114,13 @@ def main(argsTest=None):
     net.load_state_dict(checkpoint['model_state_dict'])
 
     # Move net to single GPU
-    # net = net.module.to("cuda:1")
+    # net = net.to("cuda:1")
     # device = "cuda:1"
     net = net.to("cpu")
+    # net.to is not used in Train?
     device = "cpu"  #zero for single gpu
+
+    # ?? from train   device = torch.device("cuda:"+str(device_ids[0]) if torch.cuda.is_available() else "cpu")
     # timers
     start = torch.cuda.Event(enable_timing=True)
     end = torch.cuda.Event(enable_timing=True)

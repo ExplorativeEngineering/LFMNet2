@@ -20,6 +20,9 @@ def main():
     parser.add_argument('--imagesToUse', nargs='+', type=int, default= [6])
     # GPUs to use
     parser.add_argument('--GPUs', nargs='+', type=int, default=[0])
+    
+    # ADD force to use CPU
+
     # Path to dataset
     parser.add_argument('--datasetPath', nargs='?', default= "C:/Users/LabOldenbourg/Desktop/BrainImagesJosuePage/brainSubset/brainSubset_1_1.h5")
     # Path to directory where models and tensorboard logs are stored
