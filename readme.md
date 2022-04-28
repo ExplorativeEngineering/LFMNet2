@@ -3,7 +3,8 @@
 [![Issues][issues-shield]][issues-url]-->
 [![Apache License][license-shield]][license-url]
 [![Google Scholar][gs-shield]][gs-url]
-[![PDF][arxiv-shield]][arxiv-url]
+[![Pre-print][arxiv-shield]][arxiv-url]
+[![Published][ieee-shield]][ieee-url]
 
 # LFMNet: Learning to Reconstruct Confocal Microscope Stacks from Single Light Field Images
 
@@ -76,7 +77,7 @@ python3 mainTrain.py --epochs 1000 --valEvery 0.25 --imagesToUse 0 1 2 3 4 5 --G
 ### Test
 And mainEval.py the testing file:
 ```bash
-python3 mainEval.py --epochs 1000 --valEvery 0.25 --imagesToUse 6 --GPUs 0 --batchSize 64 --validationSplit 0.1 --biasVal 0.1 --learningRate 0.005 --useBias True --useSkipCon False --fovInput 9 --neighShape 3 --useShallowUnet True --ths 0.03 --datasetPath "Brain_40x_64Depths_362imgs.h5" --outputPath "runs/" --outputPrefix "" --checkpointPath, "" 
+python3 mainEval.py --GPUs 0 --datasetPath "Brain_40x_64Depths_362imgs.h5" --outputPath "runs/" --outputPrefix "" --checkpointPath, "my_path/" --checkpointFileName, "checkpoint_" --writeVolsToH5 0 --writeToTB 1
 ```
 |Parameter|Default|Description|
 |---|---|---|
@@ -106,13 +107,15 @@ Project Link: [https://github.com/pvjosue/LFMNet](https://github.com/pvjosue/LFM
 
 ## Citing this work
 ```bibtex
-@article{pageLFMNet2020,
-    author = {Page, Josue and Saltarin, Federico and Belyaev, Yury and Lyck, Ruth and Favaro, Paolo},   
-    title = {Learning to Reconstruct Confocal Microscope Stacks from Single Light Field Images},
-    booktitle = {arXiv},
-    year = {2020}, 
-    eprint = {2003.11004}
-}
+@article{9488315,
+  author={Vizcaíno, Josué Page and Saltarin, Federico and Belyaev, Yury and Lyck, Ruth and Lasser, Tobias and Favaro, Paolo},
+  journal={IEEE Transactions on Computational Imaging}, 
+  title={Learning to Reconstruct Confocal Microscopy Stacks From Single Light Field Images}, 
+  year={2021},
+  volume={7},
+  number={},
+  pages={775-788},
+  doi={10.1109/TCI.2021.3097611}}
 ```
 
 
@@ -130,6 +133,8 @@ Project Link: [https://github.com/pvjosue/LFMNet](https://github.com/pvjosue/LFM
 [product-screenshot]: images/screenshot.png
 [arxiv-shield]: https://img.shields.io/badge/-PDF-black.svg?style=flat-square&logo=arXiv&colorB=555
 [arxiv-url]: https://arxiv.org/abs/2003.11004
+[ieee-shield]: https://img.shields.io/badge/IEEE-%20-blue?style=flat-square&
+[ieee-url]: https://ieeexplore.ieee.org/document/9488315
 
 
 
